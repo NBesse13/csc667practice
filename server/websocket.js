@@ -1,1 +1,15 @@
-console.log('I am websocket service');
+const WebSocket =  require('ws');
+const redis = require('redis');
+const client = redis.createClient();
+
+const wss = new WebSocket.Server({port: 6000});
+
+wss.on('connection', (ws) => {
+    console.log('someone has connected');
+});
+
+client.on('message', (channel,message) => {
+    console.log(`subscribe hears message ${message}`)
+});
+
+client.subscribe('testPublish');

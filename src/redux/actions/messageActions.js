@@ -23,7 +23,7 @@ export const handlTextChange = text => {
 };
 
 export const submitMessage = () => (dispatch, getState) => {
-  axios.post('/messanger/postMessage', { message: getState().messageReducer.text })
+  axios.post('/messanger/postMessage', { message: getState().messageReducer.text }) //Post takes extra parameter for data you want to send
     .then(() => { })
     .catch(e => console.log(e));
   dispatch(handlTextChange(''));
