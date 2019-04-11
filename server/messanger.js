@@ -15,6 +15,14 @@ mongoClient.connect((err) => {
     const app = express();
     app.use(bodyParser.json());
     
+    app.get('/messanger/getMessages', (req, res) => {
+        db.collection('test').find({}).toArray()
+          .then((result) => {
+            res.send(result.map(r => r.data));
+          })
+          .catch((e) => console.log(e));
+      });
+      
     app.post(('/messanger/postMessage'), (req,res) => {
         console.log(req.body);
         db.collection('test').insertOne({data: req.body.message})
