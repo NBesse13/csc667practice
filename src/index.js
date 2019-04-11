@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import messageReducer from './redux/reducers/messageReducer';
+import {insertMessage} from './redux/actions/messageActions';
 
 const rootReducer = combineReducers({
   messageReducer,
@@ -15,6 +16,12 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const webSocket = new WebSocket('ws://localhost:4000/websocket');
+
+
+webSocket.onmessage = (message) => {
+  store.dispatch(insertMessage(message.data));
+};
+
 
 ReactDOM.render(
   <Provider store={store}>

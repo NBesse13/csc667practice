@@ -9,7 +9,10 @@ wss.on('connection', (ws) => {
 });
 
 client.on('message', (channel,message) => {
-    console.log(`subscribe hears message ${message}`)
+    console.log(`subscribe hears message ${message}`);
+    wss.clients.forEach((client) => {
+        client.send(message);
+    });
 });
 
 client.subscribe('testPublish');
