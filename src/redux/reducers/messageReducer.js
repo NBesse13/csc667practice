@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   messages: [],
   text: '',
+  messageType: '',
 };
 
 const messageReducer = (state = INITIAL_STATE, action) => {
@@ -20,6 +21,16 @@ const messageReducer = (state = INITIAL_STATE, action) => {
         ...state,
         messages: [...state.messages, action.message],
       };
+    case 'INSERT_MESSAGE2':
+        return {
+          ...state,
+          messages: [...state.messages, action.message],
+        };
+    case 'SET_TYPE':
+      return{
+        ...state,
+        messageType : action.value,
+      }
     default:
       return state;
   }
